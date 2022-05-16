@@ -62,7 +62,6 @@ async function infoPlayer(){
 async function motion(evt){
 
   const info = await infoPlayer()
-  console.log(info)
   const {x, y} = info
 
   let valueX = x
