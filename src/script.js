@@ -3,14 +3,18 @@ const button = document.querySelector(".button")
 const world = document.querySelector(".world")
 
 async function login(){
-  fetch(`https://mmorpgteste.herokuapp.com/create`,
-  {
-    method: "post",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({name: input.value}),
-  })
-  localStorage.setItem("nick", input.value);
-  await player()
+  if(localStorage.getItem("nick")){
+    await player()
+  }else{
+    fetch(`https://mmorpgteste.herokuapp.com/create`,
+    {
+      method: "post",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({name: input.value}),
+    })
+    localStorage.setItem("nick", input.value);
+    await player()
+  }
 }
 
 button.addEventListener("click", async function(){
