@@ -16,8 +16,17 @@ main{
 .login{
     margin-top: 20px;
 }
-.sprite{
+.player{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+.player p{
+    color: green;
+}
+.player img{
     width: 50px;
     height: 50px;
-    position: absolute;
 }
