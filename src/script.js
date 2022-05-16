@@ -27,8 +27,8 @@ async function geolocationCharacter(){
 }
 
 async function player(){
-  world.innerHTML = "";
   const dataBase = await geolocationCharacter()
+  world.innerHTML = "";
   dataBase.forEach(player => {
     const {name, x, y} = player
     const div = document.createElement("div")
