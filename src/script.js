@@ -91,4 +91,4 @@ document.body.addEventListener("keydown", async function(evt){
     await motion(evt);
 });
 
-setInterval(async ()=>{await player()}, 1000)
+setInterval(async ()=>{await player()}, 500)
