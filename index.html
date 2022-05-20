@@ -4,16 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon</title>
+    <title>Não é pokémon</title>
     <link rel="stylesheet" href="./src/style.css">
 </head>
 <body>
-    <main class="world"></main>
+    <audio class="xaropinho" src="./src/music/xaropinho.mp3"></audio>
+    <main class="game">
+        <section class="world"></section>
+        <section class="chat">
+            <div class="scroll"><div class="frame"></div></div>
+            <div>
+                <input class="chatInput" type="text" placeholder="message">
+                <button class="chatButton">Submit</button>
+            </div>
+        </section>
+    </main>
     <section class="login">
         <input type="text" placeholder="Nick" class="input">
         <button class="button">Go</button>
     </section>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script type="module" src="./src/script.js"></script>
+    <script type="module" src="./src/scripts/game.js"></script>
+    <script type="module" src="./src/scripts/chat.js"></script>
 </body>
 </html>

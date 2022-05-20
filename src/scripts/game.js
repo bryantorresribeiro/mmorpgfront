@@ -3,10 +3,9 @@ const button = document.querySelector(".button")
 const world = document.querySelector(".world")
 
 async function login(){
-  if(localStorage.getItem("nick")){
-    await player()
-  }else{
-    fetch(`https://mmorpgteste.herokuapp.com/create`,
+  try{
+    localStorage.clear()
+    fetch(`https://mmorpgtestando.herokuapp.com/gamer/create`,
     {
       method: "post",
       headers: {"Content-Type": "application/json"},
@@ -14,6 +13,8 @@ async function login(){
     })
     localStorage.setItem("nick", input.value);
     await player()
+  }catch(err){
+    alert("Nome de jogador já está em uso!")
   }
 }
 
@@ -22,7 +23,7 @@ button.addEventListener("click", async function(){
 })
 
 async function geolocationCharacter(){
-  const geolocation = fetch(`https://mmorpgteste.herokuapp.com`,{method: 'GET'})
+  const geolocation = fetch(`https://mmorpgtestando.herokuapp.com/gamer`,{method: 'GET'})
       return (await geolocation).json()
 }
 
@@ -45,10 +46,8 @@ async function player(){
 }
 
 async function updatePlayer(valueX, valueY){
-
   const nick = localStorage.getItem("nick");
-
-  fetch(`https://mmorpgteste.herokuapp.com/update`,
+  fetch(`https://mmorpgtestando.herokuapp.com/gamer/update`,
   {
     method: "put",
     headers: {"Content-Type": "application/json"},
@@ -59,8 +58,13 @@ async function updatePlayer(valueX, valueY){
 
 async function infoPlayer(){
   const nick = localStorage.getItem("nick");
-  const index = await fetch(`https://mmorpgteste.herokuapp.com/${nick}`,{method: "get"})
-  return index.json()
+  const index = await fetch(`https://mmorpgtestando.herokuapp.com/gamer/${nick}`,{method: "get"})
+  try{
+    return await index.json()
+  }
+  catch(err){
+    console.log("Vai com calma cara!"); 
+  }
 } 
 
 async function motion(evt){
@@ -85,10 +89,16 @@ async function motion(evt){
    }
 
    await updatePlayer(valueX, valueY)
+   console.log(valueX, valueY)
 }
 
 document.body.addEventListener("keydown", async function(evt){
-    await motion(evt);
+   const motions = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]
+   motions.forEach( async (element, index) => {
+     if(evt.key === motions[index]){
+       await motion(evt)
+     }
+   });
 });
 
-setInterval(async ()=>{await player()}, 500)
+setInterval(async ()=>{await player()}, 1000)
